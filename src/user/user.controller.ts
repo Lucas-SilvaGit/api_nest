@@ -2,9 +2,11 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } 
 import { CreateUserDTO } from "./dto/create-user-dto";
 import { UpdatePutUserDTO } from "./dto/update-put-user.dto";
 import { UpdatePatchUserDTO } from "./dto/update-patch-user.dto";
+import { UserService } from "./user.service";
 
 @Controller('users')
 export class UserController {
+  constructor(private readonly userService: UserService) { }
 
   @Get()
   async list() {
@@ -17,8 +19,8 @@ export class UserController {
   }
 
   @Post()
-  async create(@Body() body: CreateUserDTO) {
-    return { body };
+  async create(@Body() { name, email, password }: CreateUserDTO) {
+    return this.userService.create({ name, email, password });
   }
 
   @Put(':id')
