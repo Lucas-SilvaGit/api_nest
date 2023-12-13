@@ -7,6 +7,7 @@ import { UserService } from "src/user/user.service";
 import { AuthService } from "./auth.service";
 import { AuthMeDTO } from "./dto/auth-me.dto";
 import { AuthGuard } from "src/guards/auth.guard";
+import { User } from "src/decorators/user-decorator";
 
 @Controller('auth')
 export class AuthController {
@@ -38,8 +39,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('me')
-  async me(@Req() req) {
-    return { me: 'ok', data: req.tokenPayload };
+  async me(@User() user) {
+    return { user };
   }
   // async me(@Headers("authorization") token) {
   //   return this.authService.checkToken((token ?? '').split(' ')[1]);
