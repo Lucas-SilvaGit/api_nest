@@ -11,7 +11,7 @@ model User {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(50)
   email     String    @unique @db.VarChar(150)
-  password  String    @db.VarChar(50)
+  password  String    @db.VarChar(250)
   birthday  DateTime? @db.Date
   role      Int       @default(1)
   createdat DateTime  @default(now()) @db.Timestamp(6)
