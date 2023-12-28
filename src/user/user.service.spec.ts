@@ -1,9 +1,22 @@
-import { somar } from "../utils/somar";
+import { Test, TestingModule } from "@nestjs/testing";
+import { UserService } from "./user.service";
+import { userRepositoryMock } from "../testing/user-repository.mock";
 
+describe('UserService', () => {
+  let userService: UserService;
 
-test('Este é meu primeiro teste', () => {
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        UserService,
+        userRepositoryMock
+      ]
+    }).compile();
+    userService = module.get<UserService>(UserService);
+  });
 
-  const resultado = somar(3, 2);
+  it('Validate the definition', () => {
+    expect(userService).toBeDefined();
 
-  expect(resultado).toEqual(5);
-});
+  })
+})
