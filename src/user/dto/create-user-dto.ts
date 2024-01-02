@@ -11,7 +11,7 @@ export class CreateUserDTO {
 
   @IsOptional()
   @IsDateString()
-  birthday: string;
+  birthday?: string;
 
   @IsStrongPassword({
     minLength: 6,
@@ -24,5 +24,5 @@ export class CreateUserDTO {
 
   @IsOptional()
   @IsEnum(Role)
-  role: number;
+  role?: number;
 }
