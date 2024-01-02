@@ -1,12 +1,12 @@
 import { BadRequestException, Body, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { AuthRegisterDTO } from "./dto/auth-register.dto";
-import { UserService } from "src/user/user.service";
+import { UserService } from "../user/user.service";
 import * as bcrypt from "bcrypt";
 import { MailerService } from '@nestjs-modules/mailer/dist';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UserEntity } from "src/user/entity/user.entity";
+import { UserEntity } from "../user/entity/user.entity";
 
 @Injectable()
 export class AuthService {
@@ -55,19 +55,17 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    const user = await this.usersRepository.findOne({
-      where: {
-        email
-      }
+    const user = await this.usersRepository.findOneBy({
+      email
     });
 
     if (!user) {
       throw new UnauthorizedException('E-mail and/or password incorrect');
     }
 
-    if (!await bcrypt.compare(password, user.password)) {
-      throw new UnauthorizedException('E-mail and/or password incorrect');
-    }
+    // if (!await bcrypt.compare(password, user.password)) {
+    //   throw new UnauthorizedException('E-mail and/or password incorrect');
+    // }
 
     return this.createToken(user);
   }
@@ -131,8 +129,11 @@ export class AuthService {
   }
 
   async register(data: AuthRegisterDTO) {
+
+    delete data.role;
+
     const user = await this.userService.create(data);
 
-    // return this.createToken(user);
+    return this.createToken(user);
   }
 }
