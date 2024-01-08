@@ -30,7 +30,7 @@ export class UserService {
 
     const user = this.usersRepository.create(data);
 
-    this.usersRepository.save(user);
+    return this.usersRepository.save(user);
   }
 
   async list() {
@@ -100,7 +100,9 @@ export class UserService {
   async delete(id: number) {
     await this.exists(id);
 
-    return this.usersRepository.delete(id);
+    await this.usersRepository.delete(id);
+
+    return true;
   }
 
   async exists(id: number) {

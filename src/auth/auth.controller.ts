@@ -43,8 +43,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('me')
-  async me(@User() user) {
-    return { user };
+  async me(@User() user, @Req() { tokenPayload }) {
+    return { user, tokenPayload };
   }
 
   @UseInterceptors(FileInterceptor('file'))
@@ -60,10 +60,10 @@ export class AuthController {
     })) photo: Express.Multer.File
   ) {
 
-    const path = join(__dirname, '..', '..', 'storage', 'photos', 'photo-${user.id}.png');
+    const filename = 'photo-${user.id}.png';
 
     try {
-      await this.fileService.upload(photo, path);
+      await this.fileService.upload(photo, filename);
     } catch (error) {
       throw new BadRequestException(error);
     }
