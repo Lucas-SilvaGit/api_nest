@@ -36,3 +36,4 @@ lerna-debug.log*
 
 # Dot Env.
 .env
+.env.test
