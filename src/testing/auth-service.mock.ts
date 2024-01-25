@@ -1,6 +1,6 @@
-import { AuthService } from "../auth/auth.service";
-import { accessToken } from "./access-token.mock";
-import { jwtPayload } from "./jwt-payload.mock";
+import { AuthService } from '../auth/auth.service';
+import { accessToken } from './access-token.mock';
+import { jwtPayload } from './jwt-payload.mock';
 
 export const AuthServiceMock = {
   provide: AuthService,
@@ -11,6 +11,6 @@ export const AuthServiceMock = {
     login: jest.fn().mockResolvedValue({ accessToken: accessToken }),
     forget: jest.fn().mockResolvedValue({ success: true }),
     reset: jest.fn().mockResolvedValue({ accessToken: accessToken }),
-    register: jest.fn().mockResolvedValue({ accessToken: accessToken })
-  }
-}
+    register: jest.fn().mockResolvedValue({ accessToken: accessToken }),
+  },
+};
