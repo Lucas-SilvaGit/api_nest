@@ -1,15 +1,13 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { FileService } from "./file.service";
-import { ExpressAdapter } from "@nestjs/platform-express";
-import { getPhoto } from "../testing/get-photo.mock";
+import { Test, TestingModule } from '@nestjs/testing';
+import { FileService } from './file.service';
+import { getPhoto } from '../testing/get-photo.mock';
 
 describe('FileService', () => {
-
   let fileService: FileService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FileService]
+      providers: [FileService],
     }).compile();
 
     fileService = module.get<FileService>(FileService);
@@ -24,7 +22,7 @@ describe('FileService', () => {
       const photo = await getPhoto();
       const filename = 'photo-test.png';
 
-      fileService.upload(photo, filename)
+      fileService.upload(photo, filename);
     });
-  })
-})
+  });
+});

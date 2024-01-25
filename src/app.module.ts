@@ -12,7 +12,7 @@ import { UserEntity } from './user/entity/user.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.ENV === 'test' ? '.env.test' : '.env'
+      envFilePath: process.env.ENV === 'test' ? '.env.test' : '.env',
     }),
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
@@ -22,8 +22,8 @@ import { UserEntity } from './user/entity/user.entity';
         port: 587,
         auth: {
           user: 'tania43@ethereal.email',
-          pass: 'taE6JbG2G17A4TGae6'
-        }
+          pass: 'taE6JbG2G17A4TGae6',
+        },
       },
       defaults: {
         from: '"nest-modules" <tania43@ethereal.email>',
@@ -32,7 +32,7 @@ import { UserEntity } from './user/entity/user.entity';
         dir: __dirname + '/templates',
         adapter: new PugAdapter(),
         options: {
-          strict: true
+          strict: true,
         },
       },
     }),
@@ -44,11 +44,11 @@ import { UserEntity } from './user/entity/user.entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [UserEntity],
-      synchronize: process.env.ENV === "development",
-    })
+      synchronize: process.env.ENV === 'development',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
-  exports: [AppService]
+  exports: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

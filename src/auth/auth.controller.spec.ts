@@ -1,25 +1,24 @@
-import { AuthController } from "./auth.controller";
-import { Test, TestingModule } from "@nestjs/testing";
-import { AuthGuard } from "../guards/auth.guard";
-import { AuthServiceMock } from "../testing/auth-service.mock";
-import { fileServiceMock } from "../testing/file-service-mock";
-import { guardMock } from "../testing/guard.mock";
-import { authLoginDTO } from "../testing/auth-login-dto.mock";
-import { accessToken } from "../testing/access-token.mock";
-import { authRegisterDTO } from "../testing/auth-register-dto.mock";
-import { authForgetDTO } from "../testing/auth-forget-dto.mock";
-import { authResetDTO } from "../testing/auth-reset-dto.mock";
-import { userEntityList } from "../testing/user-entity-list.mock";
-import { getPhoto } from "../testing/get-photo.mock";
+import { AuthController } from './auth.controller';
+import { Test, TestingModule } from '@nestjs/testing';
+import { AuthGuard } from '../guards/auth.guard';
+import { AuthServiceMock } from '../testing/auth-service.mock';
+import { fileServiceMock } from '../testing/file-service-mock';
+import { guardMock } from '../testing/guard.mock';
+import { authLoginDTO } from '../testing/auth-login-dto.mock';
+import { accessToken } from '../testing/access-token.mock';
+import { authRegisterDTO } from '../testing/auth-register-dto.mock';
+import { authForgetDTO } from '../testing/auth-forget-dto.mock';
+import { authResetDTO } from '../testing/auth-reset-dto.mock';
+import { userEntityList } from '../testing/user-entity-list.mock';
+import { getPhoto } from '../testing/get-photo.mock';
 
 describe('AuthController', () => {
-
   let authController: AuthController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthServiceMock, fileServiceMock]
+      providers: [AuthServiceMock, fileServiceMock],
     })
       .overrideGuard(AuthGuard)
       .useValue(guardMock)
@@ -30,7 +29,6 @@ describe('AuthController', () => {
 
   it('Validate the definition', () => {
     expect(authController).toBeDefined();
-
   });
 
   describe('Fluxo de autenticação', () => {
@@ -57,7 +55,7 @@ describe('AuthController', () => {
 
       expect(result).toEqual({ accessToken });
     });
-  })
+  });
 
   describe('Rotas autenticadas', () => {
     it('Me', async () => {
@@ -72,5 +70,5 @@ describe('AuthController', () => {
 
       expect(result).toEqual(photo);
     });
-  })
-})
+  });
+});

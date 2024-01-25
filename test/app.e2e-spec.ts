@@ -8,7 +8,6 @@ import dataSource from 'typeorm/data-source';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
-  let accessToken: string;
   let userId: number;
 
   beforeEach(async () => {
@@ -45,13 +44,11 @@ describe('AppController (e2e)', () => {
       .post('/auth/login')
       .send({
         email: authRegisterDTO.email,
-        password: authRegisterDTO.password
+        password: authRegisterDTO.password,
       });
 
     expect(response.statusCode).toEqual(201);
     expect(typeof response.body.accessToken).toEqual('string');
-
-    accessToken = response.body.accessToken;
   });
 
   it('/ (Obter os dados do usuario logado)', async () => {
@@ -72,8 +69,6 @@ describe('AppController (e2e)', () => {
 
     expect(response.statusCode).toEqual(201);
     expect(typeof response.body.accessToken).toEqual('string');
-
-    accessToken = response.body.accessToken;
   });
 
   it('/ (Validar de a função do novo usuario ainda é user)', async () => {
@@ -125,4 +120,4 @@ describe('AppController (e2e)', () => {
     expect(response.statusCode).toEqual(200);
     expect(response.body.length).toEqual(2);
   });
-})
+});
